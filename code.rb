@@ -11,7 +11,7 @@ def saver(word, chances, rep)
     dumper = YAML.dump({ 
         word: word,
         replacer: rep,
-        chances: rep.split("").each.select {|e| e !="-" }.length
+        chances: rep.split("").each.select! {|e| e !="-" }.length
     })
 
     file = File.open("./data/#{saved}_#{word[-1]}.yml", "w").write(dumper)
