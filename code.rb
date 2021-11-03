@@ -31,7 +31,7 @@ def play(word_list, replacer = "", chances = "", word = "")
     puts "Try to guess the letter or type \"quit\" to quit and save the game"
 
     guessed_word = gets.chomp
-    typed_words[guessed_word] = typed_words[guessed_word]+1
+    typed_words[guessed_word] = typed_words[guessed_word] + 1
 
     if letters.include?(guessed_word)
       index = letters.each_index.select { |i| letters[i] == guessed_word }
@@ -40,13 +40,11 @@ def play(word_list, replacer = "", chances = "", word = "")
     elsif guessed_word.downcase.strip == "quit"
       saver(guess, chances, replacer)
       break
+    elsif chances < guess.length + 1 and typed_words.include? guessed_word and typed_words[guessed_word] > 1
+      puts "You already entered #{guessed_word.upcase}, Try another one"
     else
       chances -= 1
       puts replacer
-    end
-    if chances < guess.length+1 and typed_words.include? guessed_word and typed_words[guessed_word]>1 then
-      puts "You already entered #{guessed_word.upcase}, Try another one"
-      chances += 1
     end
 
     break if chances == 0
@@ -89,4 +87,6 @@ when "2"
   wd = replayer[:word]
 
   play(words, replacer = rp, chances = ch, word = wd)
+else
+  play(words)
 end
